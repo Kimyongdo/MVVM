@@ -1,0 +1,2 @@
+rootProject.name='Simplified Coding_Youtube_MVVM'
+include ':app'
