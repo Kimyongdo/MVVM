@@ -2,11 +2,18 @@ package com.example.simplifiedcoding_youtube_mvvm.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.simplifiedcoding_youtube_mvvm.R
 import com.example.simplifiedcoding_youtube_mvvm.databinding.ActivityLoginBinding
 import com.example.simplifiedcoding_youtube_mvvm.util.Toast
+import com.example.simplifiedcoding_youtube_mvvm.util.hide
+import com.example.simplifiedcoding_youtube_mvvm.util.show
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 //MainActivity -> LoginActivity로 name변경, xml도 login.xml로 변경 
@@ -25,14 +32,18 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     }
 
     override fun onStarted() {
-        Toast("Login Started")
+        progress_bar.show()
     }
 
-    override fun onSuccess() {
-        Toast("Login onSuccess")
+    override fun onSuccess(loginResponse: LiveData<String>) {
+        progress_bar.hide()
+        loginResponse.observe(this, Observer {
+            Toast(it)
+        })
     }
 
     override fun onFailure(message: String) {
+        progress_bar.hide()
         Toast(message)
     }
 }
