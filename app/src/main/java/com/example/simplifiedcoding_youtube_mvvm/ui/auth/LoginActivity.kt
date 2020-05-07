@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.simplifiedcoding_youtube_mvvm.R
+import com.example.simplifiedcoding_youtube_mvvm.data.db.entities.User
 import com.example.simplifiedcoding_youtube_mvvm.databinding.ActivityLoginBinding
 import com.example.simplifiedcoding_youtube_mvvm.util.Toast
 import com.example.simplifiedcoding_youtube_mvvm.util.hide
@@ -38,14 +39,20 @@ class LoginActivity : AppCompatActivity(), AuthListener { //AuthListener을 impl
         progress_bar.show()//show()는 원래 있는게 아니라, util에서 따로 만들어 준것 (이렇게 까지 해야하나 싶은데)
     }
 
-    override fun onSuccess(loginResponse: LiveData<String>) {//알트엔터로 자동으로 추가됨.
-        //Toast("Login onSuccess")
-        loginResponse.observe(this, Observer {
-            Toast("onscuees : $it")//
-            progress_bar.hide()//hide()따로 만들어 준것. import해야함.
-        })
 
+    override fun onSuccess(user: User) {
+        Toast("${user.name} is Logged in ")
     }
+
+    //chpater6까지
+//    override fun onSuccess(loginResponse: LiveData<String>) {//알트엔터로 자동으로 추가됨.
+//        //Toast("Login onSuccess")
+//        loginResponse.observe(this, Observer {
+//            Toast("onscuees : $it")//
+//            progress_bar.hide()//hide()따로 만들어 준것. import해야함.
+//        })
+//
+//    }
 
     override fun onFailure(message: String) {
         progress_bar.hide()

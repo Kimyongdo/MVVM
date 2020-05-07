@@ -1,7 +1,9 @@
 package com.example.simplifiedcoding_youtube_mvvm.data.network
 
+import com.example.simplifiedcoding_youtube_mvvm.data.network.responses.AuthResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
@@ -13,10 +15,10 @@ interface Myapi {
 
     @FormUrlEncoded//POST 사용시 필수
     @POST("login")
-    fun userLogin(
+    suspend fun userLogin(//suspend 뭐지?? - 코루틴에서 suspend가 중심
         @Field("email") email:String, //@Field의 이름은 POSTMAN(API)와 동일하게, 변수이름은 자유롭게.
         @Field("password") password:String
-    ):Call<ResponseBody>//ResponseBody를 달라.
+    ):Response<AuthResponse>//ResponseBody를 달라. ResponseBody를->AuthResponse로 변경
 
     companion object{//가장 먼저 출력
         operator fun invoke():Myapi{ //invoke으로 실행
