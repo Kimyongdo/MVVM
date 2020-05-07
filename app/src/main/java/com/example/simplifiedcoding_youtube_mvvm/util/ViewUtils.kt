@@ -18,5 +18,5 @@ fun ProgressBar.show(){ //기본 Progressbar함수에서 show()함수 추가하�
 }
 
 fun ProgressBar.hide(){ //기본 Progressbar함수에서 hide()함수 추가하기(없는 것을 추가)
-    visibility = View.VISIBLE
+    visibility = View.GONE
 }

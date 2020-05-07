@@ -1,5 +1,6 @@
 package com.example.simplifiedcoding_youtube_mvvm.data.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.simplifiedcoding_youtube_mvvm.data.network.Myapi
@@ -17,6 +18,7 @@ class UserRepository {
             .enqueue(object :Callback<ResponseBody>{
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     loginResponse.value = t.message
+                    print("onFailure"+ loginResponse.value.toString())
                 }
 
                 override fun onResponse(
@@ -25,8 +27,10 @@ class UserRepository {
                 ) {
                     if(response.isSuccessful){
                         loginResponse.value = response.body()?.toString()//잘 도착
+                        Log.d("isSuccessful",loginResponse.value.toString())
                     }else{
                         loginResponse.value = response.errorBody()?.toString() //오긴 왔는데 에러
+                        Log.d("errorBody ",loginResponse.value.toString())
                     }
                 }//ResponseBody는 인터페이스 Myapi의 Call->Callback <ResponseBody>와 동일
             })

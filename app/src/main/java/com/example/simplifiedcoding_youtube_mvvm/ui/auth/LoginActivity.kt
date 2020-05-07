@@ -14,6 +14,9 @@ import com.example.simplifiedcoding_youtube_mvvm.util.hide
 import com.example.simplifiedcoding_youtube_mvvm.util.show
 import kotlinx.android.synthetic.main.activity_login.*
 
+//https://api.simplifiedcoding.in/course-apis/mvvm/login
+//probelalkhan@gmail.com
+//123456
 
 //MainActivity -> LoginActivity로 name변경, xml도 login.xml로 변경
 class LoginActivity : AppCompatActivity(), AuthListener { //AuthListener을 implement
@@ -38,7 +41,7 @@ class LoginActivity : AppCompatActivity(), AuthListener { //AuthListener을 impl
     override fun onSuccess(loginResponse: LiveData<String>) {//알트엔터로 자동으로 추가됨.
         //Toast("Login onSuccess")
         loginResponse.observe(this, Observer {
-            Toast(it)//
+            Toast("onscuees : $it")//
             progress_bar.hide()//hide()따로 만들어 준것. import해야함.
         })
 
@@ -46,6 +49,6 @@ class LoginActivity : AppCompatActivity(), AuthListener { //AuthListener을 impl
 
     override fun onFailure(message: String) {
         progress_bar.hide()
-        Toast(message)
+        Toast("실패 : $message")
     }
 }
