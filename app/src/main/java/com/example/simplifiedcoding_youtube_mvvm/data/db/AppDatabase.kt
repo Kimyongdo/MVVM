@@ -9,14 +9,14 @@ import com.example.simplifiedcoding_youtube_mvvm.data.db.entities.User
 @Database(
     entities = [User::class],//모든 entities를 여기에 정의
     version = 1 //버전
-
-)
+)//여러줄인줄 알았지만 하나의 줄 room이다보니 @을 쓰게 된 것
 abstract class AppDatabase : RoomDatabase() {//RoomDatabase() 확장
 
-    abstract fun getUserDao():UserDao
+    abstract fun getUserDao():UserDao//abstract class니까 함수도 abstract
 
+    //실행순서가 class -> compaion obejct -> invoke자동실행
     companion object{
-        @Volatile//아래 변수는 다른 쓰레드를 통해 즉시 보임
+        @Volatile//아래 변수는 다른 쓰레드를 통해 즉시 보임-이거 더 찾아보기 ( )
         private var instance : AppDatabase?=null
         private val LOCk = Any()
 
@@ -27,7 +27,7 @@ abstract class AppDatabase : RoomDatabase() {//RoomDatabase() 확장
             }//null이었다면 데이터베이스 생성
         }
 
-        private fun buildDatabase(context:Context)=
+        private fun buildDatabase(context:Context)=//데이터베이스 만드는 코드
             Room.databaseBuilder(//room 3개의 파라미터
                 context.applicationContext,//context
                 AppDatabase::class.java,//AppDatabase : RoomDatabase() - 확장받음
